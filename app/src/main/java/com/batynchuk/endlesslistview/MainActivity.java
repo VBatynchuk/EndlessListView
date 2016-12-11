@@ -48,6 +48,7 @@ public class MainActivity extends AppCompatActivity implements AbsListView.OnScr
         mIsLoading = true;
 
         mUsersAdapter = new UserAdapter(MainActivity.this);
+        mUsersAdapter.setUserCount(DbHandler.getInstance(this).getUserCount());
         mUsersAdapter.setUsers(DbHandler.getInstance(MainActivity.this).getUserList(0), 0);
 
         mLvUsers.setAdapter(mUsersAdapter);

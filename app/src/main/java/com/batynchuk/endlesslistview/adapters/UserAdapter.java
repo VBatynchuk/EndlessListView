@@ -7,8 +7,8 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import com.batynchuk.endlesslistview.MainActivity;
 import com.batynchuk.endlesslistview.R;
+import com.batynchuk.endlesslistview.data.DbHandler;
 import com.batynchuk.endlesslistview.models.User;
 import com.batynchuk.endlesslistview.utils.Constants;
 
@@ -20,6 +20,8 @@ import butterknife.ButterKnife;
 
 public class UserAdapter extends BaseAdapter {
 
+    private int mUserCount;
+
     private Context mContext;
     private List<User> mUsers;
 
@@ -27,10 +29,10 @@ public class UserAdapter extends BaseAdapter {
         mContext = context;
         mUsers = new ArrayList<>();
     }
-
+    
     @Override
     public int getCount() {
-        return this.mUsers != null ? mUsers.size() : 0;
+        return mUserCount;
     }
 
     @Override
@@ -58,6 +60,10 @@ public class UserAdapter extends BaseAdapter {
         holder.mTvUserItem.setText(String.format("%s %s", user.getFirstName(), user.getLastName()));
 
         return view;
+    }
+
+    public void setUserCount(int userCount) {
+        mUserCount = userCount;
     }
 
     public void setUsers(List<User> users, int page) {

@@ -59,6 +59,14 @@ public class UsersDbHelper extends SQLiteOpenHelper {
         }
     }
 
+    public int getUserCount(SQLiteDatabase database) {
+        int count = 0;
+        Cursor cursor = database.query(DataContract.DataEntry.TABLE_NAME,
+                null, null, null, null, null, null);
+        if (cursor != null) count = cursor.getCount();
+        return count;
+    }
+
     public List<User> selectPartUsers(SQLiteDatabase database, int page) {
         List<User> users = new ArrayList<>();
 

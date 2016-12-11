@@ -1,6 +1,7 @@
 package com.batynchuk.endlesslistview.data;
 
 import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
 
 import com.batynchuk.endlesslistview.models.User;
 
@@ -14,10 +15,12 @@ public class DbHandler {
 
     private static DbHandler mInstance = null;
 
-    private UsersDbHelper mHelper;
+    private UsersDbHelper dbHelper;
+    private SQLiteDatabase database;
 
     private DbHandler(Context context) {
-        this.mHelper = new UsersDbHelper(context);
+        dbHelper = new UsersDbHelper(context);
+        database = dbHelper.getWritableDatabase();
     }
 
     public static DbHandler getInstance(Context context) {
@@ -28,6 +31,10 @@ public class DbHandler {
     }
 
     public List<User> getUserList(int page) {
-        return mHelper.selectPartUsers(mHelper.getWritableDatabase(), page);
+        return dbHelper.selectPartUsers(database, page);
+    }
+
+    public int getUserCount() {
+        return dbHelper.getUserCount(database);
     }
 }
