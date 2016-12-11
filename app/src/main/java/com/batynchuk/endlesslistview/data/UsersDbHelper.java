@@ -96,6 +96,7 @@ public class UsersDbHelper extends SQLiteOpenHelper {
         try {
             cursor = database.rawQuery(query, selectionArgs);
             Log.v("TAG1", "load page:" + page);
+            database.setTransactionSuccessful();
 
         } catch (Exception e) {
             Log.e("TAG1", e.getMessage(), e);
